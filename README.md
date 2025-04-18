@@ -152,6 +152,42 @@ The XGBoost model typically performs best with:
 - MAE: ~2.76
 - RMSE: ~3.40
 
+## 🏁 Prediction Results
+
+### 2025 Saudi Arabian Grand Prix - Predicted Leaderboard
+
+| Position | Driver | Lap Time | Starting Grid |
+|----------|--------|----------|---------------|
+| 1 | Max Verstappen | 1:30.423 | 1 |
+| 2 | Charles Leclerc | 1:30.660 | 3 |
+| 3 | Oscar Piastri | 1:30.800 | 4 |
+| 4 | Lando Norris | 1:31.322 | 2 |
+| 5 | Lewis Hamilton | 1:31.635 | 7 |
+| 6 | George Russell | 1:31.675 | 6 |
+| 7 | Sergio Pérez | 1:31.646 | 8 |
+| 8 | Kevin Magnussen | 1:32.248 | 15 |
+| 9 | Carlos Sainz | 1:31.928 | 5 |
+| 10 | Fernando Alonso | 1:32.278 | 9 |
+
+[View complete results](results/prediction_results.md)
+
+### Visualizations
+
+#### Predicted Leaderboard
+![Predicted Leaderboard](results/images/saudi_gp_leaderboard.png)
+
+#### Predicted Lap Times
+![Predicted Lap Times](results/images/saudi_gp_lap_times.png)
+
+#### Grid vs Finishing Position
+![Grid vs Finish](results/images/saudi_gp_grid_vs_finish.png)
+
+#### Driver Performance Factors
+![Driver Performance](results/images/driver_performance.png)
+
+#### Time-based Features Impact
+![Time-based Features](results/images/time_based_features.png)
+
 ## 📚 Data Sources
 
 - [Ergast Motor Racing Developer API](http://ergast.com/mrd/): Historical F1 race data
