@@ -1,70 +1,179 @@
-# Saudi Arabian Grand Prix F1 Leaderboard Prediction
+# Saudi Arabian Grand Prix F1 Prediction Model
 
-This repository contains a machine learning model that predicts the finishing order (leaderboard) for the Saudi Arabian Grand Prix F1 race to be held from 18 to 20 April 2025.
+![F1 Prediction](https://img.shields.io/badge/F1-Prediction-red)
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Machine Learning](https://img.shields.io/badge/Machine%20Learning-XGBoost-green)
 
-## Project Overview
-The model analyzes historical F1 data including:
-- Previous race results at the Jeddah Corniche Circuit
-- Driver performance statistics
-- Team performance metrics
-- Qualifying results
-- Circuit characteristics
-- Weather conditions (if available)
+A comprehensive machine learning model that predicts the finishing order and lap times for the 2025 Saudi Arabian Grand Prix F1 race at the Jeddah Corniche Circuit.
 
-## Repository Structure
+## 📊 Project Overview
+
+This project uses historical F1 data and advanced machine learning techniques to predict:
+- Race finishing positions
+- Estimated lap times
+- Performance factors for each driver
+- Starting grid positions impact
+
+The model incorporates time-based features that give more weight to recent performances and current season form, providing a more accurate prediction of race outcomes.
+
+## 🏗️ Project Structure
+
 ```
 saudi-f1-prediction/
-├── data/                # Data files
+├── data/                # Data storage
 │   ├── raw/             # Raw data from APIs
 │   └── processed/       # Processed datasets
-├── models/              # Trained model files
-├── notebooks/           # Jupyter notebooks
+├── models/              # Trained model files and visualizations
 ├── src/                 # Source code
-│   ├── data/            # Data collection and processing scripts
-│   ├── features/        # Feature engineering scripts
-│   ├── models/          # Model training scripts
-│   └── visualization/   # Visualization scripts
+│   ├── data/            # Data collection & processing
+│   │   ├── collect_data.py    # API data collection
+│   │   └── process_data.py    # Data preprocessing
+│   ├── features/        # Feature engineering
+│   │   └── build_features.py  # Feature creation
+│   ├── models/          # Model training & prediction
+│   │   ├── train_model.py     # Model training
+│   │   └── predict_leaderboard.py  # Prediction generation
+│   ├── visualization/   # Result visualization
+│   │   └── visualize.py       # Visualization tools
+│   └── main.py          # Main execution script
 ├── .gitignore           # Git ignore file
 ├── requirements.txt     # Python dependencies
 ├── setup.py             # Package setup file
 └── README.md            # Project documentation
 ```
 
-## Setup Instructions
+## 🚀 Setup Instructions
 
-### Virtual Environment
+### Prerequisites
+
+- Python 3.12 or higher
+- Git
+- Internet connection (for data collection)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Saivivekkolla/saudi-f1-prediction.git
+   cd saudi-f1-prediction
+   ```
+
+2. **Create and activate a virtual environment**
+   ```bash
+   # Create a virtual environment
+   python -m venv venv
+
+   # Activate the virtual environment
+   # On Windows:
+   venv\Scripts\activate
+   # On macOS/Linux:
+   # source venv/bin/activate
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## 🏎️ Running the Model
+
+### Full Pipeline Execution
+
+To run the complete prediction pipeline (data collection, processing, feature engineering, model training, and prediction):
+
 ```bash
-# Create a virtual environment
-python -m venv venv
-
-# Activate the virtual environment
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
-# source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
+python src/main.py
 ```
 
-### Running the Model
-```bash
-# Run the prediction script
-python src/models/predict_leaderboard.py
-```
+This will:
+1. Collect F1 data from the Ergast API
+2. Process the raw data
+3. Engineer features for prediction
+4. Train and evaluate multiple models (Random Forest, XGBoost, Gradient Boosting)
+5. Generate predictions for the 2025 Saudi Arabian Grand Prix
+6. Create visualizations
+7. Save results to the `data/processed/` and `models/` directories
 
-## Data Sources
-- [Ergast Motor Racing Developer API](http://ergast.com/mrd/)
-- [Formula 1 Official Website](https://www.formula1.com/)
-- Historical race data from previous Saudi Arabian Grand Prix events
+### Output
 
-## Model Performance
-The model's accuracy is evaluated using:
-- Mean Absolute Error (MAE) for position predictions
-- Accuracy of podium predictions (top 3 finishers)
+The model produces:
+- Terminal output with the predicted leaderboard
+- CSV file with detailed predictions (`data/processed/saudi_gp_leaderboard.csv`)
+- Visualization images in the `models/` directory:
+  - `saudi_gp_leaderboard.png`: Predicted finishing positions
+  - `saudi_gp_lap_times.png`: Predicted lap times
+  - `saudi_gp_grid_vs_finish.png`: Starting grid vs. finishing position
+  - `driver_performance.png`: Driver performance metrics
+  - `constructor_performance.png`: Constructor performance metrics
+  - `prediction_factors.png`: Feature importance visualization
+  - `time_based_features.png`: Impact of time-based features
 
-## License
+## 🔍 Key Features
+
+### Data Collection
+- Historical race results from 2018-2024
+- Saudi Arabian GP specific data
+- Driver and constructor standings
+- Qualifying results
+
+### Feature Engineering
+1. **Driver-specific Features**
+   - Saudi GP performance history
+   - Current season standings
+   - Total races completed
+
+2. **Constructor-specific Features**
+   - Team performance metrics
+   - Historical circuit performance
+
+3. **Time-based Features**
+   - `saudi_recency_factor`: Measures how recently a driver has raced at Saudi GP
+   - `current_form_factor`: Captures driver's momentum in current season
+   - Exponential decay calculation for experience relevance
+
+### Prediction Models
+- Random Forest Regressor
+- XGBoost Regressor (typically best performer)
+- Gradient Boosting Regressor
+
+### Model Evaluation Metrics
+- Mean Absolute Error (MAE)
+- Root Mean Square Error (RMSE)
+- Position Accuracy (Exact, Within 1, Within 3 positions)
+
+## 📊 Model Performance
+
+Current model performance:
+- Exact position accuracy: ~18.75%
+- Within 1 position accuracy: ~25.00%
+- Within 3 positions accuracy: ~75.00%
+
+The XGBoost model typically performs best with:
+- MAE: ~2.76
+- RMSE: ~3.40
+
+## 📚 Data Sources
+
+- [Ergast Motor Racing Developer API](http://ergast.com/mrd/): Historical F1 race data
+- [Formula 1 Official Website](https://www.formula1.com/): Supplementary information
+- Historical race data from previous Saudi Arabian Grand Prix events (2021-2024)
+
+## 🔮 Future Improvements
+
+- Incorporate more granular weather data
+- Add more sophisticated time decay calculations
+- Implement ensemble prediction techniques
+- Create more advanced feature engineering
+- Add driver-specific lap time modeling
+
+## 📄 License
+
 MIT License
 
-## Author
-Created on April 18, 2025
+## 👨‍💻 Author
+
+Created by KOLLA SAI VIVEK on April 18, 2025
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
